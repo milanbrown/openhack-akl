@@ -35,3 +35,10 @@ spec:
         env:
         - name: EULA
           value: "TRUE"
+        volumeMounts:
+        - mountPath: "/data/"
+          name: volume
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: azurefile
