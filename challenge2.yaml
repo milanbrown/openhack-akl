@@ -6,12 +6,12 @@ spec:
   selector:
     app: minecraft
   ports:
-  - protocol: "TCP"
-    port: 25565
-    targetPort: 25565
-  - protocol: "TCP"
-    port: 25575
-    targetPort: 25575
+    - protocol: "TCP"
+      port: 25565
+      targetPort: 25565
+    - protocol: "TCP"
+      port: 25575
+      targetPort: 25575
   type: LoadBalancer
 ---
 apiVersion: apps/v1
@@ -31,17 +31,17 @@ spec:
         app: minecraft
     spec:
       containers:
-      - name: minecraft
-        image:  openhack/minecraft-server:2.0
-        ports:
-        - containerPort: 25565
-        - containerPort: 25575
-        env:
-        - name: EULA
-          value: "TRUE"
-        volumeMounts:
-        - mountPath: "/data/"
-          name: volume
+        - name: minecraft
+          image: openhack/minecraft-server:2.0
+          ports:
+            - containerPort: 25565
+            - containerPort: 25575
+          env:
+            - name: EULA
+              value: "TRUE"
+          volumeMounts:
+            - mountPath: "/data/"
+              name: volume
       volumes:
         - name: volume
           persistentVolumeClaim:
