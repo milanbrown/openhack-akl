@@ -7,9 +7,11 @@ spec:
     app: minecraft
   ports:
     - protocol: "TCP"
+      name: "game"
       port: 25565
       targetPort: 25565
     - protocol: "TCP"
+      name: "management"
       port: 25575
       targetPort: 25575
   type: LoadBalancer
