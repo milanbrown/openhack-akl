@@ -9,6 +9,9 @@ spec:
   - protocol: "TCP"
     port: 25565
     targetPort: 25565
+  - protocol: "TCP"
+    port: 25575
+    targetPort: 25575
   type: LoadBalancer
 ---
 apiVersion: apps/v1
@@ -18,7 +21,7 @@ metadata:
   labels:
     app: minecraft
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: minecraft
@@ -29,9 +32,10 @@ spec:
     spec:
       containers:
       - name: minecraft
-        image:  openhack/minecraft-server:1.0
+        image:  openhack/minecraft-server:2.0
         ports:
         - containerPort: 25565
+        - containerPort: 25575
         env:
         - name: EULA
           value: "TRUE"
