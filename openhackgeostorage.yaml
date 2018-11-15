@@ -1,7 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: azurefile
+  name: azurefilegeo
 provisioner: kubernetes.io/azure-file
 mountOptions:
   - dir_mode=0755
@@ -9,7 +9,7 @@ mountOptions:
   - uid=1000
   - gid=1000
 parameters:
-  skuName: Standard_LRS
+  skuName: Standard_GRS
   storageAccount: georedundantopenhack01
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -37,11 +37,11 @@ subjects:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: azurefile
+  name: azurefilegeo
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: azurefile
+  storageClassName: azurefilegeo
   resources:
     requests:
       storage: 5Gi
@@ -95,7 +95,7 @@ spec:
       volumes:
         - name: volume
           persistentVolumeClaim:
-            claimName: azurefile
+            claimName: azurefilegeo
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
